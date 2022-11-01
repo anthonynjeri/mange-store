@@ -64,7 +64,7 @@ const ProductDetails = () => {
     get(`productinfo/id${id}.json`)
       .then((data) => setProductDetails(data))
       .catch((error) => console.log(error));
-  }, []);
+  });
   return (
     <>
       <Container>

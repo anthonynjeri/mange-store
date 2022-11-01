@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import About from "./components/About";
 import Cart from "./components/Cart";
