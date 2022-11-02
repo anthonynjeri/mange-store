@@ -1,14 +1,21 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { CartContext } from "./CartProvider";
 import styled from "styled-components";
 import { loadStripe } from "@stripe/stripe-js";
 
+// Intergrating stripe payment for checkout
 const stripeKey =
   "pk_test_51KZG2fHrJWQTUDnecxdmO2tjWUEGVNXnC8n2sEvta93pSiW5JyIXiodzfmiyr9acDAzuj6eMdOSEINMwKxGIFXwz002v7e2hNt";
-// const stripeLoadedPromise = loadStripe(
-//   "pk_test_51HsqkCGuhXEITAut89vmc4jtjYd7XPs8hWfo2XPef15MFqI8rCFc8NqQU9WutlUBsd8kmNqHBeEmSrdMMpeEEyfT00KzeVdate"
-// );
+
 const stripeLoadedPromise = loadStripe(stripeKey);
+
+const Container = styled.div`
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 30px;
+`;
+const Wrapper = styled.div``;
 const TableContainer = styled.div``;
 const Table = styled.table`
   width: 100%;
@@ -51,6 +58,52 @@ const TableFooter = styled.tfoot`
 const Image = styled.img`
   height: 30px;
   width: 30px;
+`;
+const TextContent = styled.div``;
+const Title = styled.h1``;
+const Desc = styled.p``;
+const Form = styled.form`
+  padding-top: 30px;
+  width: 85%;
+`;
+const Input = styled.input`
+  padding: 15px;
+  border: 0;
+  background-color: #e4f7d2;
+
+  caret-color: #00ab72;
+  &:focus {
+    outline: 0;
+  }
+`;
+const Button = styled.button`
+  cursor: pointer;
+  padding: 15px 30px;
+  font-weight: 600;
+  border: 0;
+  color: white;
+  display: block;
+  background-color: #00b947;
+  border-radius: 3px;
+  margin-top: 15px;
+  transition: background-color 200ms, color 200ms;
+
+  &:hover {
+    background-color: #00997b;
+  }
+`;
+const ButtonShop = styled(Link)`
+  padding: 15px 42px;
+  border: 0;
+  background-color: #00b157;
+  border-radius: 3px;
+  display: inline-block;
+  color: white;
+  transition: background-color 200ms, color 200ms;
+
+  &:hover {
+    background-color: #00997b;
+  }
 `;
 const Cart = () => {
   const [email, setEmail] = useState("");
@@ -98,17 +151,18 @@ const Cart = () => {
     });
   };
   return (
-    <div>
-      <div className="cart-layout">
+    <Container>
+      <Wrapper>
         {cart.length === 0 && (
-          <div>
-            <h1>Your Cart</h1>
-            <p>You have not added any product to your cart yet.</p>
-          </div>
+          <TextContent>
+            <Title>Cart</Title>
+            <Desc>Your cart is currently empty</Desc>
+            <ButtonShop to="products">Shop Products</ButtonShop>
+          </TextContent>
         )}
         {cart.length > 0 && (
           <TableContainer>
-            <Table class="table table-cart">
+            <Table>
               <TableHead>
                 <TableRow>
                   <TableHeader width="25%" className="th-product">
@@ -124,15 +178,10 @@ const Cart = () => {
                 {cart.map((product) => (
                   <TableRow key={product.id}>
                     <TableData>
-                      <Image
-                        width="30"
-                        src={product.image}
-                        height="30"
-                        alt=""
-                      />
+                      <Image src={product.image} alt={product.name} />
                       {product.name}
                     </TableData>
-                    <TableData>${product.price}</TableData>
+                    <TableData>${product.price.toFixed(2)}</TableData>
                     <TableData>{product.quantity}</TableData>
                     <TableData>
                       <strong>${product.price * product.quantity}</strong>
@@ -148,12 +197,13 @@ const Cart = () => {
                 </TableRow>
               </TableFooter>
             </Table>
-            <form className="pay-form" onSubmit={handleFormSubmit}>
-              <p>
-                Enter your email and then click on pay and your products will be
-                delivered to you on the same day!
-              </p>
-              <input
+            <Form onSubmit={handleFormSubmit}>
+              <Desc>
+                Enter your email and then click on checkout to proceed with your
+                payment, once confirmed your goods will be delivered to you in a
+                couple of hours!
+              </Desc>
+              <Input
                 value={email}
                 onChange={(event) => handleEmailChange(event)}
                 autoComplete="email"
@@ -161,12 +211,12 @@ const Cart = () => {
                 type="email"
                 required
               />
-              <button type="submit">Pay</button>
-            </form>
+              <Button type="submit">Checkout</Button>
+            </Form>
           </TableContainer>
         )}
-      </div>
-    </div>
+      </Wrapper>
+    </Container>
   );
 };
 

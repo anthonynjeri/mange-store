@@ -10,7 +10,7 @@ const TableHead = styled.thead`
   color: white;
   border: 1px solid white;
   border-top: 0;
-  background-color: #5ec401;
+  background-color: #00b157;
 `;
 const TableRow = styled.tr`
   display: flex;
@@ -31,10 +31,10 @@ const TableData = styled.td`
 const ProductDetailNutrition = ({ nutrition }) => {
   return (
     <Container>
-      <Table class="table table-nutrition">
+      <Table>
         <TableHead>
           <TableRow>
-            <TableHeader>Nutrient</TableHeader>
+            <TableHeader>Nutrients</TableHeader>
             <TableHeader>Value</TableHeader>
           </TableRow>
         </TableHead>

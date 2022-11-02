@@ -6,7 +6,7 @@ const Desc = styled.p``;
 const Button = styled.button`
   display: inline-block;
   cursor: pointer;
-  background-color: #5ec401;
+  background-color: #00b157;
   color: white;
   width: 100%;
   font-size: 14px;
@@ -17,12 +17,12 @@ const Button = styled.button`
   transition: background-color 200ms, color 200ms;
 
   &:hover {
-    background-color: rgba(94, 196, 1, 0.8);
+    background-color: #00997b;
   }
 `;
 export default function ProductDetailInfo({ details }) {
-  const { handleProductAdd, cart } = useContext(CartContext);
-  console.log(cart);
+  const { handleProductAdd } = useContext(CartContext);
+
   return (
     <>
       <Container>

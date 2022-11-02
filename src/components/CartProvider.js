@@ -19,12 +19,10 @@ const CartProvider = (props) => {
     } else {
       setCart([...cart, { ...newProduct, quantity: 1 }]);
     }
-    console.log(`Adding product ${newProduct.id}`);
   };
   const handleProductDelete = (id) => {
     const updateCart = cart.filter((product) => product.id !== id);
     setCart(updateCart);
-    console.log(`Deleting product ${id}`);
   };
 
   const values = {

@@ -1,6 +1,3 @@
-import ProductDetailInfo from "./ProductDetailInfo.js";
-// import ProductDetailNutrition from "./ProductDetailNutrition.js";
-// import ProductDetailStorage from "./ProductDetailStorage.js";
 import React, { useEffect, useState } from "react";
 import {
   NavLink,
@@ -15,8 +12,11 @@ import useFetch from "../hooks/useFetch";
 import Loader from "./Loader.js";
 import ProductDetailStorage from "./ProductDetailStorage.js";
 import ProductDetailNutrition from "./ProductDetailNutrition.js";
+import ProductDetailInfo from "./ProductDetailInfo.js";
 
-const Container = styled.div``;
+const Container = styled.div`max-width: 1440px;
+margin: 0 auto;
+padding 0 30px;`;
 const TopContainer = styled.div``;
 const BottomContainer = styled.div``;
 
@@ -47,7 +47,7 @@ const NavlinkDetails = styled(NavLink)`
   padding-right: 15px;
 
   &.active {
-    border-bottom: 7px solid #5ec401;
+    border-bottom: 7px solid #00b157;
   }
 `;
 
@@ -56,7 +56,7 @@ const ProductDetails = () => {
   const params = useParams();
   const { id } = params;
   const match = useRouteMatch();
-  console.log(match);
+
   const { get, loading } = useFetch(
     "https://react-tutorial-demo.firebaseio.com/"
   );
@@ -64,7 +64,7 @@ const ProductDetails = () => {
     get(`productinfo/id${id}.json`)
       .then((data) => setProductDetails(data))
       .catch((error) => console.log(error));
-  });
+  }, []);
   return (
     <>
       <Container>
@@ -73,8 +73,6 @@ const ProductDetails = () => {
           <h2>{productDetails.name}</h2>
           <ImageContainer>
             <Image
-              width="125"
-              height="125"
               src={productDetails.image}
               className="product-details-image"
               alt={productDetails.name}

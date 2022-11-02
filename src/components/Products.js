@@ -4,7 +4,11 @@ import useFetch from "../hooks/useFetch";
 import styled from "styled-components";
 import Loader from "./Loader";
 
-const Container = styled.div``;
+const Container = styled.div`
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 30px;
+`;
 const Wrapper = styled.div`
   padding: 40px 0;
 `;
@@ -15,6 +19,9 @@ const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 25px;
+  @media screen and (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Products = () => {
@@ -29,13 +36,13 @@ const Products = () => {
       .catch((error) =>
         console.log(`There was an error fetching the data ${error}`)
       );
-  });
+  }, []);
 
   return (
     <Container>
       <Wrapper>
         <Title>Products</Title>
-        <Desc>Take a look at our products</Desc>
+        <Desc>Take a look at our current products</Desc>
         <GridContainer>
           {loading && <Loader />}
           {products.map((product) => (

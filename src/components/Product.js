@@ -9,6 +9,8 @@ const ProductWrapper = styled.div`
   padding: 15px 20px;
   border-radius: 25px;
   display: grid;
+  gap: 10px;
+
   grid-template-columns: auto 1fr auto;
 `;
 const ProductImageContainer = styled.div`
@@ -17,7 +19,7 @@ const ProductImageContainer = styled.div`
 const ImageContainer = styled.div`
   width: 100px;
   height: 100px;
-  background-color: coral;
+  background-color: #2f4858;
   padding: 10px;
   border-radius: 20px;
   transition: transform 180ms ease-out;
@@ -36,7 +38,7 @@ const ProductQuantityContainer = styled.div`
   padding: 5px;
 `;
 const ProductQuantity = styled.div`
-  background-color: #5ec401;
+  background-color: #00b157;
   color: white;
   border-radius: 50%;
   font-size: 14px;
@@ -64,7 +66,7 @@ const ButtonDelete = styled.button`
   font-weight: 600;
   cursor: pointer;
   &:hover {
-    background-color: #5ec401;
+    background-color: #00b157;
     color: white;
     transition: background-color 200ms, color 200ms;
   }
@@ -76,11 +78,12 @@ const PriceButton = styled.button`
   font-size: 14px;
   font-weight: 600;
   padding: 13px 40px;
+  color: white;
   border: 0;
-  background-color: #5ec401;
+  background-color: #00b157;
   transition: background-color 200ms, color 200ms;
   &:hover {
-    background-color: rgba(94, 196, 1, 0.8);
+    background-color: #00997b;
     color: white;
   }
 `;
