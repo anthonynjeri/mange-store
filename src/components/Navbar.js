@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import mangeLogo from "../assets/images/Mange-Store-dark.png";
+import mangeLogo from "../assets/images/Mange-Store.png";
 import { CartContext } from "./CartProvider";
 
 const Container = styled.div`
