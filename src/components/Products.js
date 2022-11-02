@@ -36,7 +36,7 @@ const Products = () => {
       .catch((error) =>
         console.log(`There was an error fetching the data ${error}`)
       );
-  }, []);
+  }, [get]);
 
   return (
     <Container>
