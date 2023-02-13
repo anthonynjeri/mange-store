@@ -138,8 +138,8 @@ const Cart = () => {
         .redirectToCheckout({
           lineItems: lineItems,
           mode: "payment",
-          successUrl: "https://papaya-churros-7b8cfb.netlify.app/products",
-          cancelUrl: "https://papaya-churros-7b8cfb.netlify.app/",
+          successUrl: "https://papaya-churros-7b8cfb.netlify.app",
+          cancelUrl: "https://papaya-churros-7b8cfb.netlify.app",
           customerEmail: email,
         })
         .then((response) => {
