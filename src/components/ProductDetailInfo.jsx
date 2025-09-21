@@ -30,9 +30,6 @@ export default function ProductDetailInfo({ details }) {
           {details.description} goes for <strong>${details.price}</strong> per
           piece.
         </Desc>
-        <Button onClick={() => handleProductAdd(details)}>
-          ${details.price}
-        </Button>
       </Container>
     </>
   );
