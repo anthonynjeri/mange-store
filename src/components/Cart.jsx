@@ -1,18 +1,29 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ShoppingBag, Plus, Minus, Trash2, CreditCard, Shield, Truck, ArrowRight, Package, CheckCircle } from "lucide-react";
+import {
+  ShoppingBag,
+  Plus,
+  Minus,
+  Trash2,
+  CreditCard,
+  Shield,
+  Truck,
+  ArrowRight,
+  Package,
+  CheckCircle,
+} from "lucide-react";
 import { CartContext } from "./CartProvider";
 import { loadStripe } from "@stripe/stripe-js";
 
-const stripeKey =
-  "pk_test_51KZG2fHrJWQTUDnecxdmO2tjWUEGVNXnC8n2sEvta93pSiW5JyIXiodzfmiyr9acDAzuj6eMdOSEINMwKxGIFXwz002v7e2hNt";
+const stripeKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
 
 const stripeLoadedPromise = loadStripe(stripeKey);
 
 const Cart = () => {
   const [email, setEmail] = useState("");
-  const { cart, handleProductAdd, handleProductDelete } = useContext(CartContext);
+  const { cart, handleProductAdd, handleProductDelete } =
+    useContext(CartContext);
 
   const totalPrice = cart.reduce(
     (total, product) => total + product.price * product.quantity,
@@ -57,13 +68,13 @@ const Cart = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, staggerChildren: 0.1 }
-    }
+      transition: { duration: 0.6, staggerChildren: 0.1 },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
   };
 
   return (
@@ -84,7 +95,11 @@ const Cart = () => {
                 Shopping Cart
               </h1>
               <p className="text-sm sm:text-base text-gray-600">
-                {cart.length === 0 ? 'Your cart is empty' : `${cart.length} item${cart.length > 1 ? 's' : ''} ready for checkout`}
+                {cart.length === 0
+                  ? "Your cart is empty"
+                  : `${cart.length} item${
+                      cart.length > 1 ? "s" : ""
+                    } ready for checkout`}
               </p>
             </div>
           </div>
@@ -102,7 +117,8 @@ const Cart = () => {
               Your cart is empty
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-6 sm:mb-8 max-w-md mx-auto leading-relaxed">
-              Discover our premium selection of fresh groceries and add them to your cart for a convenient shopping experience.
+              Discover our premium selection of fresh groceries and add them to
+              your cart for a convenient shopping experience.
             </p>
             <Link to="/products">
               <motion.button
@@ -128,10 +144,12 @@ const Cart = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 sm:gap-3">
                       <Package className="text-primary-600" size={20} />
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Your Items</h3>
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">
+                        Your Items
+                      </h3>
                     </div>
                     <span className="bg-primary-100 text-primary-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
-                      {cart.length} item{cart.length > 1 ? 's' : ''}
+                      {cart.length} item{cart.length > 1 ? "s" : ""}
                     </span>
                   </div>
                 </div>
@@ -168,7 +186,7 @@ const Cart = () => {
                         <div className="flex items-center gap-1 text-yellow-400">
                           {[...Array(5)].map((_, i) => (
                             <span key={i} className="text-xs">
-                              {i < (product.rating || 4) ? '⭐' : '☆'}
+                              {i < (product.rating || 4) ? "⭐" : "☆"}
                             </span>
                           ))}
                         </div>
@@ -246,21 +264,32 @@ const Cart = () => {
             </motion.div>
 
             {/* Order Summary - Mobile optimized */}
-            <motion.div className="space-y-4 sm:space-y-6" variants={itemVariants}>
+            <motion.div
+              className="space-y-4 sm:space-y-6"
+              variants={itemVariants}
+            >
               {/* Order Summary Card */}
               <div className="bg-white rounded-xl md:rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                 <div className="bg-primary-900 p-4 sm:p-6 text-white">
                   <div className="flex items-center gap-2 sm:gap-3">
                     <CreditCard size={20} />
-                    <h3 className="text-lg sm:text-xl font-bold">Order Summary</h3>
+                    <h3 className="text-lg sm:text-xl font-bold">
+                      Order Summary
+                    </h3>
                   </div>
                 </div>
 
                 <div className="p-4 sm:p-6">
                   <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
                     <div className="flex justify-between text-sm sm:text-base text-gray-600">
-                      <span>Subtotal ({cart.reduce((sum, item) => sum + item.quantity, 0)} items)</span>
-                      <span className="font-semibold">${totalPrice.toFixed(2)}</span>
+                      <span>
+                        Subtotal (
+                        {cart.reduce((sum, item) => sum + item.quantity, 0)}{" "}
+                        items)
+                      </span>
+                      <span className="font-semibold">
+                        ${totalPrice.toFixed(2)}
+                      </span>
                     </div>
                     <div className="flex justify-between text-sm sm:text-base text-gray-600">
                       <div className="flex items-center gap-1 sm:gap-2">
@@ -274,20 +303,32 @@ const Cart = () => {
                     </div>
                     <div className="flex justify-between text-sm sm:text-base text-gray-600">
                       <span>Estimated Tax</span>
-                      <span className="font-semibold">${(totalPrice * 0.08).toFixed(2)}</span>
+                      <span className="font-semibold">
+                        ${(totalPrice * 0.08).toFixed(2)}
+                      </span>
                     </div>
                     <div className="border-t border-gray-200 pt-3 sm:pt-4">
                       <div className="flex justify-between text-lg sm:text-xl font-bold text-gray-900">
                         <span>Total</span>
-                        <span className="text-primary-600">${(totalPrice * 1.08).toFixed(2)}</span>
+                        <span className="text-primary-600">
+                          ${(totalPrice * 1.08).toFixed(2)}
+                        </span>
                       </div>
-                      <p className="text-xs sm:text-sm text-gray-500 mt-1">Including all taxes and fees</p>
+                      <p className="text-xs sm:text-sm text-gray-500 mt-1">
+                        Including all taxes and fees
+                      </p>
                     </div>
                   </div>
 
-                  <form onSubmit={handleFormSubmit} className="space-y-4 sm:space-y-6">
+                  <form
+                    onSubmit={handleFormSubmit}
+                    className="space-y-4 sm:space-y-6"
+                  >
                     <div>
-                      <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2 sm:mb-3">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-bold text-gray-700 mb-2 sm:mb-3"
+                      >
                         Email Address for Receipt
                       </label>
                       <input
@@ -320,7 +361,12 @@ const Cart = () => {
                   <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-100">
                     <div className="flex items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-500">
                       <Shield size={14} className="text-green-500" />
-                      <span>Secured by <span className="font-semibold text-gray-700">Stripe</span></span>
+                      <span>
+                        Secured by{" "}
+                        <span className="font-semibold text-gray-700">
+                          Stripe
+                        </span>
+                      </span>
                     </div>
                     <div className="grid grid-cols-3 gap-2 mt-2 sm:mt-3">
                       <div className="text-center text-xs text-gray-400">
@@ -352,20 +398,28 @@ const Cart = () => {
                 </div>
                 <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-green-800">
                   <div className="flex items-center gap-2 sm:gap-3">
-                    <CheckCircle className="text-green-600 flex-shrink-0" size={14} />
+                    <CheckCircle
+                      className="text-green-600 flex-shrink-0"
+                      size={14}
+                    />
                     <span>Same-day delivery available (order by 2 PM)</span>
                   </div>
                   <div className="flex items-center gap-2 sm:gap-3">
-                    <CheckCircle className="text-green-600 flex-shrink-0" size={14} />
+                    <CheckCircle
+                      className="text-green-600 flex-shrink-0"
+                      size={14}
+                    />
                     <span>100% fresh guarantee or money back</span>
                   </div>
                   <div className="flex items-center gap-2 sm:gap-3">
-                    <CheckCircle className="text-green-600 flex-shrink-0" size={14} />
+                    <CheckCircle
+                      className="text-green-600 flex-shrink-0"
+                      size={14}
+                    />
                     <span>Temperature-controlled vehicles</span>
                   </div>
                 </div>
               </div>
-
             </motion.div>
           </div>
         )}
